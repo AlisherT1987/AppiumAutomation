@@ -9,18 +9,18 @@ import org.junit.jupiter.api.Test;
 
 public class SauceLabAppTest {
     @Test
-    public void TestLogin() throws InterruptedException {
+    public void TestLogin() {
         AppiumDriver<MobileElement> driver = Driver.getDriver();
 
         System.out.println(driver.getDeviceTime());
-        Thread.sleep(4000);
+        System.out.println(driver.getPlatformName());
         driver.findElement(MobileBy.AccessibilityId("test-Username")).sendKeys("standard_user");
         driver.findElement(MobileBy.AccessibilityId("test-Password")).sendKeys("secret_sauce");
         driver.findElement(MobileBy.AccessibilityId("test-LOGIN")).click();
 
         // cast our driver to AndroidDriver to be able use a useful method that comes from this library
         // similat to JSE at selenium, we can use following script to scroll into view
-        ((AndroidDriver)driver).findElementsByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Policy\"));");
+      //  ((AndroidDriver)driver).findElementsByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"Policy\"));");
         Driver.closeDriver();
     }
 }

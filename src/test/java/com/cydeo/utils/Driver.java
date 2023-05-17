@@ -3,6 +3,7 @@ package com.cydeo.utils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
@@ -83,7 +84,7 @@ public class Driver {
                     break;
                 case "remote-android-swaglab":
                     // we get following capabilities setup from saucelab configurator, we change some lines according to our test need, and we need to add app location
-                    String personalHubInfo = "";
+                    String personalHubInfo = "oauth-XXXXXX-2ca62:4XXXXXXXc247364-XXXXXXXa2ea";
                     MutableCapabilities capsAndroid = new MutableCapabilities();
                     capsAndroid.setCapability("platformName", "Android");
                     capsAndroid.setCapability("appium:deviceName", "Samsung.*");
@@ -101,7 +102,52 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
-                    driver = new AndroidDriver(url, capsAndroid);
+                    driver = new AndroidDriver(url, capsAndroid); // polymorphism
+                    break;
+                case "remote-iphone-swaglab":
+                    String personalHubInfoIOS = "oauth-XXXXXXXX-2ca62:4c247364-XXXX-4b73-b8df-2a2d945XXXXXba2ea";
+                    MutableCapabilities capsIphone = new MutableCapabilities();
+                    capsIphone.setCapability("platformName", "iOS");
+                    capsIphone.setCapability("appium:deviceName", "iPhone Simulator");
+                    capsIphone.setCapability("appium:platformVersion", "16.2");
+                    capsIphone.setCapability("appium:deviceOrientation", "portrait");
+                    capsIphone.setCapability("appium:automationName", "XCUITest");
+                    capsIphone.setCapability(MobileCapabilityType.APP,"https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
+                    MutableCapabilities sauceOptionsIOS = new MutableCapabilities();
+                    sauceOptionsIOS.setCapability("name", "swaglab test iphone");
+                    capsIphone.setCapability("sauce:options", sauceOptionsIOS);
+                    try {
+                        url = new URL("https://"+personalHubInfoIOS+"@ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    driver = new IOSDriver(url, capsIphone);
+                    break;
+                case "remote-android-swaglab-systemProp":
+                    MutableCapabilities capsAndroidSYS = new MutableCapabilities();
+                    capsAndroidSYS.setCapability("platformName", "Android");
+                    capsAndroidSYS.setCapability("appium:deviceName", "Samsung.*");
+                    capsAndroidSYS.setCapability("appium:deviceOrientation", "portrait");
+                    capsAndroidSYS.setCapability("appium:automationName", "UiAutomator2");
+                    capsAndroidSYS.setCapability(MobileCapabilityType.APP,"https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    capsAndroidSYS.setCapability("appPackage","com.swaglabsmobileapp");
+                    capsAndroidSYS.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
+                    MutableCapabilities sauceOptionsSYS = new MutableCapabilities();
+                    sauceOptionsSYS.setCapability("name", "swaglab test");
+                    sauceOptionsSYS.setCapability("username",System.getenv("SAUCE_USERNAME"));
+                    sauceOptionsSYS.setCapability("accessKey",System.getenv("SAUCE_ACCESS_KEY"));
+                    capsAndroidSYS.setCapability("sauce:options", sauceOptionsSYS);
+
+                    try {
+                        url = new URL("https://ondemand.eu-central-1.saucelabs.com/wd/hub");   // either US or EU central hub
+                        /*
+                    private String SAUCE_EU_URL = "https://ondemand.eu-central-1.saucelabs.com/wd/hub";
+                    private String SAUCE_US_URL = "https://ondemand.us-west-1.saucelabs.com/wd/hub";
+                         */
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    driver = new AndroidDriver(url, capsAndroidSYS);
                     break;
             }
         }
