@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -63,6 +64,44 @@ public class Driver {
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     }
+                    break;
+                case "android-sauceLabApp":
+                    DesiredCapabilities desiredCapabilities2 = new DesiredCapabilities();
+                    desiredCapabilities2.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+                    desiredCapabilities2.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
+                    desiredCapabilities2.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
+                    desiredCapabilities2.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 3");
+                    desiredCapabilities2.setCapability(MobileCapabilityType.APP, "/Users/oscar/IdeaProjects/B28_AppiumAutomation/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    desiredCapabilities2.setCapability("appPackage","com.swaglabsmobileapp");
+                    desiredCapabilities2.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
+                    try {
+                        url = new URL("http://localhost:4723/wd/hub");
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    driver = new AndroidDriver<>(url, desiredCapabilities2);
+                    break;
+                case "remote-android-swaglab":
+                    // we get following capabilities setup from saucelab configurator, we change some lines according to our test need, and we need to add app location
+                    String personalHubInfo = "";
+                    MutableCapabilities capsAndroid = new MutableCapabilities();
+                    capsAndroid.setCapability("platformName", "Android");
+                    capsAndroid.setCapability("appium:deviceName", "Samsung.*");
+                    capsAndroid.setCapability("appium:deviceOrientation", "portrait");
+                    capsAndroid.setCapability("appium:automationName", "UiAutomator2");
+                    capsAndroid.setCapability(MobileCapabilityType.APP,"https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    capsAndroid.setCapability("appPackage","com.swaglabsmobileapp");
+                    capsAndroid.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
+                    MutableCapabilities sauceOptions = new MutableCapabilities();
+                    sauceOptions.setCapability("name", "swaglab test");
+                    capsAndroid.setCapability("sauce:options", sauceOptions);
+
+                    try {
+                        url = new URL("https://"+personalHubInfo+"@ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+                    } catch (MalformedURLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    driver = new AndroidDriver(url, capsAndroid);
                     break;
             }
         }
