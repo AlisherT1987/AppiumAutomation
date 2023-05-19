@@ -30,6 +30,7 @@ public class EtsyAppTest {
 
         // Test the login functionality of ETSY native APP
         // click start button
+        Thread.sleep(2000);
         driver.findElement(By.id("com.etsy.android:id/btn_sign_in_dialog")).click();
         Thread.sleep(2000);
         // send email information
@@ -40,8 +41,10 @@ public class EtsyAppTest {
         Thread.sleep(3000);
         driver.findElement(By.id("com.etsy.android:id/sign_in_button_email")).click();
         Thread.sleep(8000);
+       driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.widget.EditText")).sendKeys("Cybertek2020");
         // get text of the username information
-        System.out.println(driver.findElement(By.id("join-neu-overlay-title")).getText());
+        String name=driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.webkit.WebView/android.webkit.WebView/android.view.View/android.view.View/android.view.View/android.view.View[4]")).getText();
+        System.out.println(name);
         Thread.sleep(2000);
 
         System.out.println(driver.getDeviceTime());

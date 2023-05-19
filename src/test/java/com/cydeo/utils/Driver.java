@@ -98,7 +98,7 @@ public class Driver {
                     capsAndroid.setCapability("sauce:options", sauceOptions);
 
                     try {
-                        url = new URL("https://"+personalHubInfo+"@ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+                        url = new URL("https://oauth-alisher.tussupbayev.qa-64cca:f49d582e-15f4-489e-b718-a10610a275ae@ondemand.us-west-1.saucelabs.com:443/wd/hub");
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
@@ -117,7 +117,7 @@ public class Driver {
                     sauceOptionsIOS.setCapability("name", "swaglab test iphone");
                     capsIphone.setCapability("sauce:options", sauceOptionsIOS);
                     try {
-                        url = new URL("https://"+personalHubInfoIOS+"@ondemand.eu-central-1.saucelabs.com:443/wd/hub");
+                        url = new URL("https://oauth-alisher.tussupbayev.qa-64cca:f49d582e-15f4-489e-b718-a10610a275ae@ondemand.us-west-1.saucelabs.com:443/wd/hub");
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }
