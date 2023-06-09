@@ -12,11 +12,14 @@ public class CalculatorPage {
         PageFactory.initElements(new AppiumFieldDecorator(Driver.getDriver()), this);
     }
 
+
     @AndroidFindBy(accessibility = "multiply")
     public MobileElement multiply;
 
     @AndroidFindBy(accessibility = "equals")
     public MobileElement equals;
+    @AndroidFindBy(id="com.google.android.calculator:id/digit_9")
+    public MobileElement nine;
 
     @AndroidFindBy(id = "com.google.android.calculator:id/result_final")
     public MobileElement result;

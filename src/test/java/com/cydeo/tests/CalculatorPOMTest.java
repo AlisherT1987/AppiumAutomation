@@ -13,8 +13,10 @@ public class CalculatorPOMTest {
      * 5 * 8 = 40
      */
     @Test
-    public void multiplyTest() {
-        calculatorPage.clickSingleDigit(5);
+    public void multiplyTest() throws InterruptedException {
+        //calculatorPage.clickSingleDigit(5);
+        Thread.sleep(2000);
+        calculatorPage.nine.click();
         calculatorPage.multiply.click();
         calculatorPage.clickSingleDigit(8);
         calculatorPage.equals.click();

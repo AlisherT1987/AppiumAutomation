@@ -72,7 +72,7 @@ public class Driver {
                     desiredCapabilities2.setCapability(MobileCapabilityType.PLATFORM_NAME, Platform.ANDROID);
                     desiredCapabilities2.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
                     desiredCapabilities2.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 3");
-                    desiredCapabilities2.setCapability(MobileCapabilityType.APP, "/Users/oscar/IdeaProjects/B28_AppiumAutomation/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
+                    desiredCapabilities2.setCapability(MobileCapabilityType.APP, "/Users/alishertussupbayev/IdeaProjects/Rest_Assured/AppiumAutomation/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk");
                     desiredCapabilities2.setCapability("appPackage","com.swaglabsmobileapp");
                     desiredCapabilities2.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
                     try {
@@ -108,14 +108,33 @@ public class Driver {
                     String personalHubInfoIOS = "oauth-XXXXXXXX-2ca62:4c247364-XXXX-4b73-b8df-2a2d945XXXXXba2ea";
                     MutableCapabilities capsIphone = new MutableCapabilities();
                     capsIphone.setCapability("platformName", "iOS");
-                    capsIphone.setCapability("appium:deviceName", "iPhone Simulator");
-                    capsIphone.setCapability("appium:platformVersion", "16.2");
+                    capsIphone.setCapability("browserName", "Safari");
+                    capsIphone.setCapability("appium:deviceName", "iPhone.*");
                     capsIphone.setCapability("appium:deviceOrientation", "portrait");
                     capsIphone.setCapability("appium:automationName", "XCUITest");
                     capsIphone.setCapability(MobileCapabilityType.APP,"https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");
                     MutableCapabilities sauceOptionsIOS = new MutableCapabilities();
                     sauceOptionsIOS.setCapability("name", "swaglab test iphone");
                     capsIphone.setCapability("sauce:options", sauceOptionsIOS);
+                   /* MutableCapabilities caps = new MutableCapabilities();
+                    caps.setCapability("platformName", "iOS");
+                    caps.setCapability("browserName", "Safari");
+                    caps.setCapability("appium:deviceName", "iPhone.*");
+                    caps.setCapability("appium:deviceOrientation", "portrait");
+                    caps.setCapability("appium:automationName", "XCUITest");
+                    MutableCapabilities sauceOptions = new MutableCapabilities();
+                    sauceOptions.setCapability("username", "oauth-alisher.tussupbayev.qa-64cca");
+                    sauceOptions.setCapability("accessKey", "f49d582e-15f4-489e-b718-a10610a275ae");
+                    sauceOptions.setCapability("build", "<your build id>");
+                    sauceOptions.setCapability("name", "<your test name>");
+                    caps.setCapability("sauce:options", sauceOptions);
+
+
+
+                    URL url = new URL("https://ondemand.us-west-1.saucelabs.com:443/wd/hub");
+                    IOSDriver driver = new IOSDriver(url, caps);
+
+                    */
                     try {
                         url = new URL("https://oauth-alisher.tussupbayev.qa-64cca:f49d582e-15f4-489e-b718-a10610a275ae@ondemand.us-west-1.saucelabs.com:443/wd/hub");
                     } catch (MalformedURLException e) {
